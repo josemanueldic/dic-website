@@ -3,40 +3,40 @@ import { CtaBand } from "@/components/CtaBand";
 import { Photo } from "@/components/Photo";
 import { ProjectGrid } from "@/components/ProjectGrid";
 import { ServiceList } from "@/components/ServiceList";
-import { TrenchSection } from "@/components/TrenchSection";
+import { UtilityDiagram } from "@/components/UtilityDiagram";
 import { projects } from "@/lib/projects";
 import { site } from "@/lib/site";
-
-const systems = [
-  { name: "Potable water", note: "Supply networks", color: "bg-water" },
-  { name: "TSE", note: "Treated sewage effluent lines", color: "bg-tse" },
-  { name: "Foul sewer", note: "Gravity and rising mains", color: "bg-sewer" },
-  { name: "Storm water drainage", note: "Drains and outfalls", color: "bg-storm" },
-];
+import { systems } from "@/lib/systems";
 
 export default function HomePage() {
   return (
     <>
       {/* Hero */}
       <section className="on-dark relative overflow-hidden bg-ink text-white">
-        <div className="relative z-10 mx-auto max-w-7xl px-5 pb-[300px] pt-14 md:pb-[330px] md:pt-20">
-          <h1 className="display max-w-4xl text-[clamp(2.1rem,5.2vw,4.4rem)]">
-            Civil, infrastructure and utility contractor in Qatar
-          </h1>
-          <p className="mt-6 max-w-2xl text-lg text-white/85">
-            {site.name} delivers wet utility, road, steel, flooring and building works for Ashghal, Kahramaa,
-            QatarEnergy, Qatar Rail and the main contractors who work with them.
-          </p>
-          <div className="mt-8 flex flex-wrap gap-3">
-            <Link href="/contact-us" className="btn btn-light">
-              Request a quotation
-            </Link>
-            <Link href="/projects" className="btn btn-outline-light">
-              View our projects
-            </Link>
+        <div className="hero-grid pointer-events-none absolute inset-0" aria-hidden="true" />
+        <div className="relative mx-auto grid max-w-7xl gap-12 px-5 py-16 md:py-24 lg:grid-cols-[1.1fr_0.9fr] lg:items-center lg:gap-16">
+          <div>
+            <p className="heading text-sm uppercase tracking-[0.16em] text-white/60">
+              {site.yearsExperience} years in Qatar
+            </p>
+            <h1 className="display mt-4 max-w-xl text-[clamp(2.1rem,5.2vw,4.2rem)]">
+              Civil, infrastructure and utility contractor in Qatar
+            </h1>
+            <p className="mt-6 max-w-xl text-lg text-white/85">
+              {site.name} delivers wet utility, road, steel, flooring and building works for Ashghal, Kahramaa,
+              QatarEnergy, Qatar Rail and the main contractors who work with them.
+            </p>
+            <div className="mt-8 flex flex-wrap gap-3">
+              <Link href="/contact-us" className="btn btn-light">
+                Request a quotation
+              </Link>
+              <Link href="/projects" className="btn btn-outline-light">
+                View our projects
+              </Link>
+            </div>
           </div>
+          <UtilityDiagram className="lg:justify-self-end lg:max-w-md" />
         </div>
-        <TrenchSection className="absolute inset-x-0 bottom-0 h-[290px] w-full md:h-[320px]" />
       </section>
 
       {/* Approvals */}
@@ -81,7 +81,7 @@ export default function HomePage() {
             <ul className="border-t border-ink">
               {systems.map((s) => (
                 <li key={s.name} className="flex items-center gap-5 border-b border-line py-4">
-                  <span aria-hidden="true" className={`h-4 w-16 shrink-0 rounded-full ${s.color}`} />
+                  <span aria-hidden="true" className="h-4 w-16 shrink-0 rounded-full" style={{ background: s.color }} />
                   <span>
                     <span className="heading block text-lg">{s.name}</span>
                     <span className="text-sm text-muted">{s.note}</span>
