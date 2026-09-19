@@ -1,0 +1,138 @@
+@import "tailwindcss";
+
+@theme {
+  --color-ink: #13212b;
+  --color-ink-soft: #1d303c;
+  --color-concrete: #e6eae7;
+  --color-paper: #f6f7f5;
+  --color-line: #c9d0cd;
+  --color-muted: #4b5b65;
+  --color-maroon: #8a1538;
+  --color-maroon-deep: #6b102c;
+
+  /* Utility colour code, used for the wet-utility systems */
+  --color-water: #2f7fe0;
+  --color-tse: #8e5bd1;
+  --color-sewer: #2fa36b;
+  --color-storm: #8796a0;
+
+  --font-sans: "Archivo Variable", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--color-paper);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  font-stretch: 100%;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+:focus-visible {
+  outline: 3px solid var(--color-maroon);
+  outline-offset: 3px;
+}
+.on-dark :focus-visible {
+  outline-color: #fff;
+}
+
+@layer components {
+  /* Expanded, heavy headline style */
+  .display {
+    font-stretch: 120%;
+    font-weight: 800;
+    letter-spacing: -0.015em;
+    line-height: 1.05;
+  }
+  .heading {
+    font-stretch: 112%;
+    font-weight: 750;
+    letter-spacing: -0.01em;
+    line-height: 1.12;
+  }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.8rem 1.4rem;
+    font-weight: 650;
+    font-stretch: 105%;
+    border: 2px solid transparent;
+    border-radius: 2px;
+    transition: background-color 0.15s, color 0.15s, border-color 0.15s;
+  }
+  .btn-primary {
+    background: var(--color-maroon);
+    color: #fff;
+  }
+  .btn-primary:hover {
+    background: var(--color-maroon-deep);
+  }
+  .btn-light {
+    background: #fff;
+    color: var(--color-ink);
+  }
+  .btn-light:hover {
+    background: var(--color-concrete);
+  }
+  .btn-outline-light {
+    border-color: rgb(255 255 255 / 0.55);
+    color: #fff;
+  }
+  .btn-outline-light:hover {
+    background: rgb(255 255 255 / 0.12);
+  }
+
+  .text-link {
+    font-weight: 650;
+    text-decoration: underline;
+    text-decoration-thickness: 2px;
+    text-underline-offset: 4px;
+    text-decoration-color: var(--color-maroon);
+  }
+  .text-link:hover {
+    text-decoration-color: currentColor;
+  }
+
+  /* Photo placeholder: engineering-drawing hatch */
+  .photo-ph {
+    position: relative;
+    background-color: var(--color-concrete);
+    background-image: repeating-linear-gradient(
+      -45deg,
+      transparent 0 9px,
+      rgb(19 33 43 / 0.09) 9px 10px
+    );
+    outline: 1px solid var(--color-line);
+    outline-offset: -1px;
+  }
+}
+
+/* Hero: pipes are "laid" from left to right, once, on page load. */
+@keyframes lay {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+.lay {
+  transform-box: fill-box;
+  transform-origin: 0 50%;
+  animation: lay 1.4s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+  animation-delay: var(--d, 0s);
+}
+@media (prefers-reduced-motion: reduce) {
+  .lay {
+    animation: none;
+  }
+  html {
+    scroll-behavior: auto;
+  }
+}
